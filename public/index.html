@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Public Assets</title>
+    <script src="https://unpkg.com/axios@0.24.0/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/qs@6.10.2/dist/qs.js"></script>
+  </head>
+  <body>
+    Aimyon
+    <input id="fileInput" type="file" multiple />
+    <script>
+      // 测试 form data 传参
+      const fileInput = document.querySelector('#fileInput');
+
+      async function formData() {
+        const data = new FormData();
+        data.set('name', 'Aimyon');
+        data.set('age', 29);
+        data.set('file1', fileInput.files[0]);
+        data.set('file2', fileInput.files[1]);
+
+        const res = await axios.post('/api/person/file', data, {
+          headers: { 'content-type': 'multipart/form-data' },
+        });
+        console.log(res);
+      }
+
+      fileInput.onchange = formData;
+
+      // 测试 urlParam 传参
+      // async function urlParam() {
+      //   const res = await axios.get('/api/person/1');
+      //   console.log(res);
+      // }
+      // urlParam();
+
+      // 测试 query 传参
+      // async function query() {
+      //   const res = await axios.get('/api/person/find', {
+      //     params: {
+      //       name: 'Aimyon',
+      //       age: 29,
+      //     },
+      //   });
+      //   console.log(res);
+      // }
+      // query();
+
+      // urlencoded 传参
+      // async function formUrlEncoded() {
+      //   const res = await axios.post(
+      //     '/api/person',
+      //     Qs.stringify({
+      //       name: 'Aimyon',
+      //       age: 29,
+      //     }),
+      //     {
+      //       headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      //     },
+      //   );
+      //   console.log(res);
+      // }
+      // formUrlEncoded();
+
+      // json 传参
+      // async function json() {
+      //   const res = await axios.post('/api/person', {
+      //     name: 'aimyon',
+      //     age: 29,
+      //   });
+      //   console.log(res);
+      // }
+      // json();
+    </script>
+  </body>
+</html>
